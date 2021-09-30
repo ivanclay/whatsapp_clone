@@ -1,0 +1,15 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #D2DBDC;
+  margin: 0;
+  font-family: 'Segoe UI', 'Helvetica Neue', 'Lucida Grande', Arial;
+}
+
+.app-window {
+  display: flex;
+  height: 100vh;
+  background-color: #EDEDED;
+}
