@@ -51,6 +51,7 @@
 
 /*******/
 .chatWindow--body {
+    padding: 20px 30px;
     flex: 1;
     overflow-y: auto;
     background-color: #E5DDD5;
