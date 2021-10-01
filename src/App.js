@@ -10,7 +10,7 @@ import SearchIcon from '@material-ui/icons/Search';
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default () => {
-  const [chatList, setChatList] = useState([{},{},{},{}]);
+  const [chatList, setChatList] = useState([{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}]);
 
   return (
     <div className="app-window">

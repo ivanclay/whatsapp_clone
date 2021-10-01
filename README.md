@@ -14,6 +14,8 @@ A "clone" of the WhatsApp Web as a way to study Reactjs.
 - [x] Configure app area  
 - [x] Configure sidebar header  
 - [x] Styling sidebar
+- [x] Create chat list item component
+- [x] Styling chat list item component
 
 # Getting Started with Create React App
 
