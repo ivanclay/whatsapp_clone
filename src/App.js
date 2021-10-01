@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import './App.css';
 
 import ChatListItem from "./components/ChatListItem/ChatListItem";
+import ChatIntro from "./components/ChatIntro/ChatIntro";
+import ChatWindow from "./components/ChatWindow/ChatWindow";
 
 import DonutLargeIcon from '@material-ui/icons/DonutLarge';
 import ChatIcon from '@material-ui/icons/Chat';
@@ -10,7 +12,13 @@ import SearchIcon from '@material-ui/icons/Search';
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default () => {
-  const [chatList, setChatList] = useState([{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}]);
+  const [chatList, setChatList] = useState([
+    {chatId: 1, title: 'Fulano', image: 'https://clinica.cenfesaude.com.br/wp-content/uploads/2021/02/img_avatar.png'},
+    {chatId: 2, title: 'Joana', image: 'https://clinica.cenfesaude.com.br/wp-content/uploads/2021/02/img_avatar.png'},
+    {chatId: 3, title: 'Mario', image: 'https://clinica.cenfesaude.com.br/wp-content/uploads/2021/02/img_avatar.png'},
+    {chatId: 4, title: 'Astolfo', image: 'https://clinica.cenfesaude.com.br/wp-content/uploads/2021/02/img_avatar.png'},
+  ]);
+  const [activeChat, setActiveChat] = useState({});
 
   return (
     <div className="app-window">
@@ -41,11 +49,23 @@ export default () => {
         </div>
         <div className="chatlist">
           {chatList.map((i,k)=>(
-            <ChatListItem key={k} data={i} />
+            <ChatListItem 
+              key={k} 
+              data={i} 
+              onClick={() => setActiveChat(chatList[k])}
+            />
           ))}
         </div>
       </div>
-      <div className="contentarea">...CONTENT</div>
+      <div className="contentarea">
+        {activeChat.chatId !== undefined &&
+          <ChatWindow />
+        }
+         {activeChat.chatId === undefined &&
+          <ChatIntro/>
+        }
+        
+      </div>
     </div>
   );
 }

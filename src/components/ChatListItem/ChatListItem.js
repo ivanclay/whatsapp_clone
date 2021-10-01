@@ -2,9 +2,12 @@ import React from 'react';
 import './ChatListItem.css'
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default () => {
+export default ({onClick}) => {
     return (
-        <div className="chatListItem">
+        <div 
+            className="chatListItem"
+            onClick={onClick}
+        >
             <img 
                 className="chatListItem--avatar"
                 src="https://clinica.cenfesaude.com.br/wp-content/uploads/2021/02/img_avatar.png"
