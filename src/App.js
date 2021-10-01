@@ -19,6 +19,11 @@ export default () => {
     {chatId: 4, title: 'Astolfo', image: 'https://clinica.cenfesaude.com.br/wp-content/uploads/2021/02/img_avatar.png'},
   ]);
   const [activeChat, setActiveChat] = useState({});
+  const [user, setUser] = useState({
+    id: 123,
+    avatar: 'https://i.pinimg.com/736x/59/74/d0/5974d04323d9efbaf170c72cfdb07b44.jpg',
+    name: 'Ivan Moura'
+  });
 
   return (
     <div className="app-window">
@@ -26,7 +31,7 @@ export default () => {
         <header>
           <img 
             className="header--avatar" 
-            src="https://clinica.cenfesaude.com.br/wp-content/uploads/2021/02/img_avatar.png" 
+            src={user.avatar} 
             alt=""
           />
           <div className="header--buttons">
@@ -60,7 +65,7 @@ export default () => {
       </div>
       <div className="contentarea">
         {activeChat.chatId !== undefined &&
-          <ChatWindow />
+          <ChatWindow user={user}/>
         }
          {activeChat.chatId === undefined &&
           <ChatIntro/>

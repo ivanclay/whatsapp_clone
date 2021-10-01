@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import EmojiPicker from 'emoji-picker-react';
 import './ChatWindow.css'
 
@@ -13,7 +13,9 @@ import SendIcon from '@material-ui/icons/Send';
 import MicIcon from '@material-ui/icons/Mic';
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default () => {
+export default ({user}) => {
+
+    const body = useRef();
 
     let recognition = null;
     let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -25,7 +27,55 @@ export default () => {
     const [emojiOpen, setEmojiOpen] = useState(false);
     const [text, setText] = useState('');
     const [listening, setListening] = useState(false);
-    const [talkList, setTalkList] = useState([{},{},{}]);
+    const [talkList, setTalkList] = useState([
+        {author: 145, body: 'Você vem quando?'},
+        {author: 123, body: 'Eu vou amanhã'},
+        {author: 123, body: 'tenha calma'},
+        {author: 145, body: 'Estou tranquilo'},
+        {author: 145, body: 'blz! Fui!!!'},
+        {author: 145, body: 'Você vem quando?'},
+        {author: 123, body: 'Eu vou amanhã'},
+        {author: 123, body: 'tenha calma'},
+        {author: 145, body: 'Estou tranquilo'},
+        {author: 145, body: 'blz! Fui!!!'},
+        {author: 145, body: 'Você vem quando?'},
+        {author: 123, body: 'Eu vou amanhã'},
+        {author: 123, body: 'tenha calma'},
+        {author: 145, body: 'Estou tranquilo'},
+        {author: 145, body: 'blz! Fui!!!'},
+        {author: 145, body: 'Você vem quando?'},
+        {author: 123, body: 'Eu vou amanhã'},
+        {author: 123, body: 'tenha calma'},
+        {author: 145, body: 'Estou tranquilo'},
+        {author: 145, body: 'blz! Fui!!!'},
+        {author: 145, body: 'Você vem quando?'},
+        {author: 123, body: 'Eu vou amanhã'},
+        {author: 123, body: 'tenha calma'},
+        {author: 145, body: 'Estou tranquilo'},
+        {author: 145, body: 'blz! Fui!!!'},
+        {author: 145, body: 'Você vem quando?'},
+        {author: 123, body: 'Eu vou amanhã'},
+        {author: 123, body: 'tenha calma'},
+        {author: 145, body: 'Estou tranquilo'},
+        {author: 145, body: 'blz! Fui!!!'},
+        {author: 145, body: 'Você vem quando?'},
+        {author: 123, body: 'Eu vou amanhã'},
+        {author: 123, body: 'tenha calma'},
+        {author: 145, body: 'Estou tranquilo'},
+        {author: 145, body: 'blz! Fui!!!'},
+        {author: 145, body: 'Você vem quando?'},
+        {author: 123, body: 'Eu vou amanhã'},
+        {author: 123, body: 'tenha calma'},
+        {author: 145, body: 'Estou tranquilo'},
+        {author: 145, body: 'blz! Fui!!!'},
+    ]);
+
+    useEffect(()=>{
+        if(body.current.scrollHeight > body.current.offsetHeight){
+            body.current.srollTop = body.current.scrollHeight - body.current.offsetHeight;
+            alert(body.current.srollTop);
+        }
+    },[talkList]);
 
     const handleEmojiClick = (e, emojiObject) => {
         setText(text + emojiObject.emoji);
@@ -86,11 +136,12 @@ export default () => {
 
             {/* ************ */}
 
-            <div className="chatWindow--body">
+            <div ref={body} className="chatWindow--body">
                 {talkList.map((item, k)=>(
                     <MessageItem
                         key={k}
                         data={item}
+                        user={user}
                     />
                 ))}
             </div>

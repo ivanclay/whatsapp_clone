@@ -26,6 +26,7 @@ A "clone" of the WhatsApp Web as a way to study Reactjs.
 - [x] Styling emoji area
 - [x] Configure speech recognition
 - [x] Styling message area
+- [x] Styling message body
 
 # Getting Started with Create React App
 
