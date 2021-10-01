@@ -11,7 +11,8 @@ A "clone" of the WhatsApp Web as a way to study Reactjs.
     - [x] material-ui/core
     - [x] material-ui/icons
     - [x] emoji-picker-react
-- [x] Configure app area    
+- [x] Configure app area  
+- [x] Configure sidebar header  
 
 # Getting Started with Create React App
 
