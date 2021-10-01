@@ -20,6 +20,8 @@ A "clone" of the WhatsApp Web as a way to study Reactjs.
 - [x] Styling chat intro component
 - [x] Create chat window component
 - [x] Styling chat window header
+- [x] Styling chat window body
+- [x] Styling chat window footer
 
 # Getting Started with Create React App
 
