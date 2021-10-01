@@ -13,6 +13,7 @@ A "clone" of the WhatsApp Web as a way to study Reactjs.
     - [x] emoji-picker-react
 - [x] Configure app area  
 - [x] Configure sidebar header  
+- [x] Styling sidebar
 
 # Getting Started with Create React App
 
