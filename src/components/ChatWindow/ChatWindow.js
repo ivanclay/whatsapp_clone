@@ -72,8 +72,7 @@ export default ({user}) => {
 
     useEffect(()=>{
         if(body.current.scrollHeight > body.current.offsetHeight){
-            body.current.srollTop = body.current.scrollHeight - body.current.offsetHeight;
-            alert(body.current.srollTop);
+            body.current.scrollTop = body.current.scrollHeight - body.current.offsetHeight;
         }
     },[talkList]);
 
