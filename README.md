@@ -30,6 +30,7 @@ A "clone" of the WhatsApp Web as a way to study Reactjs.
 - [x] animation chat, scroll to bottom
 - [x] Create new chat area
 - [x] Styling new chat area
+- [x] Create firebaseConfig
 
 # Getting Started with Create React App
 
