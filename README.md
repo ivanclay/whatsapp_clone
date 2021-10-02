@@ -28,6 +28,8 @@ A "clone" of the WhatsApp Web as a way to study Reactjs.
 - [x] Styling message area
 - [x] Styling message body
 - [x] animation chat, scroll to bottom
+- [x] Create new chat area
+- [x] Styling new chat area
 
 # Getting Started with Create React App
 
