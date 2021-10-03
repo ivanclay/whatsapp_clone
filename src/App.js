@@ -11,17 +11,22 @@ import ChatIcon from '@material-ui/icons/Chat';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import SearchIcon from '@material-ui/icons/Search';
 import Login from "./components/Login/Login";
+import Api from "./Api";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default () => {
   const [chatList, setChatList] = useState([
-    {chatId: 1, title: 'Fulano', image: 'https://clinica.cenfesaude.com.br/wp-content/uploads/2021/02/img_avatar.png'},
-    {chatId: 2, title: 'Joana', image: 'https://clinica.cenfesaude.com.br/wp-content/uploads/2021/02/img_avatar.png'},
-    {chatId: 3, title: 'Mario', image: 'https://clinica.cenfesaude.com.br/wp-content/uploads/2021/02/img_avatar.png'},
-    {chatId: 4, title: 'Astolfo', image: 'https://clinica.cenfesaude.com.br/wp-content/uploads/2021/02/img_avatar.png'},
+    // {chatId: 1, title: 'Fulano', image: 'https://clinica.cenfesaude.com.br/wp-content/uploads/2021/02/img_avatar.png'},
+    // {chatId: 2, title: 'Joana', image: 'https://clinica.cenfesaude.com.br/wp-content/uploads/2021/02/img_avatar.png'},
+    // {chatId: 3, title: 'Mario', image: 'https://clinica.cenfesaude.com.br/wp-content/uploads/2021/02/img_avatar.png'},
+    // {chatId: 4, title: 'Astolfo', image: 'https://clinica.cenfesaude.com.br/wp-content/uploads/2021/02/img_avatar.png'},
   ]);
   const [activeChat, setActiveChat] = useState({});
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({
+    id: 'YrzupfPTNrcsgpLNnTGsAGQcDZm1',
+    name: 'Ivan FAKE',
+    avatar: 'https://graph.facebook.com/4741835062494723/picture'
+  });
 
   const [showNewChat, setShowNewChat] = useState(false);
 
@@ -29,13 +34,13 @@ export default () => {
     setShowNewChat(true);
   }
 
-  const handleLoginData = (u) => {
+  const handleLoginData = async (u) => {
     let newUser = {
       id: u.uid,
       name: u.displayName,
       avatar: u.photoURL
     };
-    //
+    await Api.addUser(newUser);
     setUser(newUser);
   }
 

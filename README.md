@@ -33,7 +33,9 @@ A "clone" of the WhatsApp Web as a way to study Reactjs.
 - [x] Create firebaseConfig
 - [x] Create login component
 - [x] Configure login component
-- [x] Modify 'start' in package.json to run 'HTTPS'
+- [x] Modify 'start' in package.json to run 'HTTPS'c
+- [x] Configure contact list
+- [x] Implement contact list
 
 # Getting Started with Create React App
 

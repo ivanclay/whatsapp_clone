@@ -1,19 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './NewChat.css'
 
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import Api from '../../Api';
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default ({user, chatList, show, setShow}) => {
     const [contactList, setContactList] = useState([
-            {id: 145, avatar: 'https://i.pinimg.com/736x/59/74/d0/5974d04323d9efbaf170c72cfdb07b44.jpg', name:'Pedro Joaquim'},
-            {id: 145, avatar: 'https://i.pinimg.com/736x/59/74/d0/5974d04323d9efbaf170c72cfdb07b44.jpg', name:'Pedro Joaquim'},
-            {id: 145, avatar: 'https://i.pinimg.com/736x/59/74/d0/5974d04323d9efbaf170c72cfdb07b44.jpg', name:'Pedro Joaquim'},
+            // {id: 145, avatar: 'https://i.pinimg.com/736x/59/74/d0/5974d04323d9efbaf170c72cfdb07b44.jpg', name:'Pedro Joaquim'},
+            // {id: 145, avatar: 'https://i.pinimg.com/736x/59/74/d0/5974d04323d9efbaf170c72cfdb07b44.jpg', name:'Pedro Joaquim'},
+            // {id: 145, avatar: 'https://i.pinimg.com/736x/59/74/d0/5974d04323d9efbaf170c72cfdb07b44.jpg', name:'Pedro Joaquim'},
         ]);
 
-        const handleClose = () => {
-            setShow(false);
+    const handleClose = () => {
+        setShow(false);
+    }
+
+    useEffect(() => {
+        const getContactList = async () => {
+            if(user !== null){
+                let result = await Api.getContactList(user.id);
+                setContactList(result);
+            }
         }
+        getContactList();
+    }, [user])
+
+
 
     return (
         <div className="newChat" style={{left: show ? 0 : -415}}>
