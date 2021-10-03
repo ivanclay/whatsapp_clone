@@ -37,4 +37,38 @@ export default {
 
     return contacts;
 },
+addNewChat: async (user, userInvited) => {
+  let newChat = await db.collection('chats').add({
+    messages:[],
+    users: [user, userInvited]
+  });
+
+  db.collection('users').doc(user.id).update({
+    chats: firebase.firestore.FieldValue.arrayUnion({
+      chatId: newChat.id,
+      title: userInvited.name,
+      image: userInvited.avatar,
+      with: userInvited.id
+    })
+  });
+
+  db.collection('users').doc(userInvited.id).update({
+    chats: firebase.firestore.FieldValue.arrayUnion({
+      chatId: newChat.id,
+      title: user.name,
+      image: user.avatar,
+      with: user.id
+    })
+  });
+},
+onChatList: async (userId, setChatList) => {
+  return db.collection('users').doc(userId).onSnapshot((doc)=>{
+    if(doc.exists){
+      let data = doc.data();
+      if(data.chats){
+        setChatList(data.chats);
+      }
+    }
+  });
+},
 }

@@ -1,8 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './ChatListItem.css'
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default ({onClick, active, data}) => {
+
+    const [time, setTime] = useState('');
+
+    useEffect(() => {
+        if(data.lastMessageDate > 0){
+            let d = new Date(data.lastMessageDate.seconds  * 1000);
+
+            let h = d.getHours();
+            let m = d.getMinutes();
+
+            h = h < 10 ? '0'+h : h;
+            m = m < 10 ? '0'+m : m;
+
+            setTime(`${h}:${m}`);
+
+
+        }
+    }, [data])
+
     return (
         <div 
             className={`chatListItem ${active? 'active' : ''}`}
@@ -16,11 +35,11 @@ export default ({onClick, active, data}) => {
             <div className="chatListItem--lines">
             <div className="chatListItem--line">
                 <div className="chatListItem--name">{data.title}</div>
-                <div className="chatListItem--date">19:00</div>
+                <div className="chatListItem--date">{time}</div>
             </div>
             <div className="chatListItem--line">
             <div className="chatListItem--lastMsg">
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                <p>{data.lastMessage}</p>
             </div>
             </div>
             </div>

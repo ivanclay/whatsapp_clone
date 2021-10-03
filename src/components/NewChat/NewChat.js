@@ -26,6 +26,11 @@ export default ({user, chatList, show, setShow}) => {
         getContactList();
     }, [user])
 
+    const addNewChat = async (userInvited) => {
+        await Api.addNewChat(user, userInvited);
+        handleClose();
+    }
+
 
 
     return (
@@ -38,7 +43,11 @@ export default ({user, chatList, show, setShow}) => {
             </div>
             <div className="newChat--list">
                 {contactList.map((item,k)=>(
-                    <div key={k} className="newChat--item">
+                    <div 
+                        key={k} 
+                        className="newChat--item"
+                        onClick={()=>addNewChat(item)}
+                    >
                         <img className="newChat--itemavatar" src={item.avatar} alt="" />
                         <div className="newChat--itemname">{item.name}</div>
                     </div>
