@@ -31,6 +31,9 @@ A "clone" of the WhatsApp Web as a way to study Reactjs.
 - [x] Create new chat area
 - [x] Styling new chat area
 - [x] Create firebaseConfig
+- [x] Create login component
+- [x] Configure login component
+- [x] Modify 'start' in package.json to run 'HTTPS'
 
 # Getting Started with Create React App
 

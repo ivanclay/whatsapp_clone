@@ -10,6 +10,7 @@ import DonutLargeIcon from '@material-ui/icons/DonutLarge';
 import ChatIcon from '@material-ui/icons/Chat';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import SearchIcon from '@material-ui/icons/Search';
+import Login from "./components/Login/Login";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default () => {
@@ -20,16 +21,26 @@ export default () => {
     {chatId: 4, title: 'Astolfo', image: 'https://clinica.cenfesaude.com.br/wp-content/uploads/2021/02/img_avatar.png'},
   ]);
   const [activeChat, setActiveChat] = useState({});
-  const [user, setUser] = useState({
-    id: 123,
-    avatar: 'https://i.pinimg.com/736x/59/74/d0/5974d04323d9efbaf170c72cfdb07b44.jpg',
-    name: 'Ivan Moura'
-  });
+  const [user, setUser] = useState(null);
 
   const [showNewChat, setShowNewChat] = useState(false);
 
   const handleOpenNewChatChoose = () => {
     setShowNewChat(true);
+  }
+
+  const handleLoginData = (u) => {
+    let newUser = {
+      id: u.uid,
+      name: u.displayName,
+      avatar: u.photoURL
+    };
+    //
+    setUser(newUser);
+  }
+
+  if(user === null){
+    return (<Login onReceive={handleLoginData} />);
   }
 
   return (
