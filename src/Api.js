@@ -71,4 +71,27 @@ onChatList: async (userId, setChatList) => {
     }
   });
 },
+onChatContent: async (chatId, setTalkList) => {
+  return db.collection('chats').doc(chatId).onSnapshot((doc)=>{
+    if(doc.exists){
+      let data = doc.data();
+      // let teste = [];//new Array();
+      const teste = data.messages.map(m =>( {... m,...{date: m.date.seconds}}) )
+      //teste.push(data.messages);
+      console.log(teste);
+      setTalkList(teste);
+    }
+  });
+},
+sendMessage: async (chatData, userId, type, body) => {
+  let now = new Date();
+  await db.collection('chats').doc(chatData.chatId).update({
+    messages: firebase.firestore.FieldValue.arrayUnion({
+      type: type,
+      author: userId,
+      body: body,
+      date: now
+    })
+   });
+},
 }

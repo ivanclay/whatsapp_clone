@@ -37,6 +37,7 @@ A "clone" of the WhatsApp Web as a way to study Reactjs.
 - [x] Configure contact list
 - [x] Implement contact list
 - [x] Implement chat list
+- [x] Implement recover data from database
 
 # Getting Started with Create React App
 

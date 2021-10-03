@@ -7,4 +7,3 @@
 //   messagingSenderId: "XXXXXXXXXXXXX",
 //   appId: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 // };
-

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import EmojiPicker from 'emoji-picker-react';
 import './ChatWindow.css'
 
+import Api from '../../Api';
 import MessageItem from '../MessageItem/MessageItem';
 
 import MoreVertIcon from '@material-ui/icons/MoreVert';
@@ -13,7 +14,7 @@ import SendIcon from '@material-ui/icons/Send';
 import MicIcon from '@material-ui/icons/Mic';
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default ({user}) => {
+export default ({user, data}) => {
 
     const body = useRef();
 
@@ -27,48 +28,14 @@ export default ({user}) => {
     const [emojiOpen, setEmojiOpen] = useState(false);
     const [text, setText] = useState('');
     const [listening, setListening] = useState(false);
-    const [talkList, setTalkList] = useState([
-        {author: 145, body: 'Você vem quando?'},
-        {author: 123, body: 'Eu vou amanhã'},
-        {author: 123, body: 'tenha calma'},
-        {author: 145, body: 'Estou tranquilo'},
-        {author: 145, body: 'blz! Fui!!!'},
-        {author: 145, body: 'Você vem quando?'},
-        {author: 123, body: 'Eu vou amanhã'},
-        {author: 123, body: 'tenha calma'},
-        {author: 145, body: 'Estou tranquilo'},
-        {author: 145, body: 'blz! Fui!!!'},
-        {author: 145, body: 'Você vem quando?'},
-        {author: 123, body: 'Eu vou amanhã'},
-        {author: 123, body: 'tenha calma'},
-        {author: 145, body: 'Estou tranquilo'},
-        {author: 145, body: 'blz! Fui!!!'},
-        {author: 145, body: 'Você vem quando?'},
-        {author: 123, body: 'Eu vou amanhã'},
-        {author: 123, body: 'tenha calma'},
-        {author: 145, body: 'Estou tranquilo'},
-        {author: 145, body: 'blz! Fui!!!'},
-        {author: 145, body: 'Você vem quando?'},
-        {author: 123, body: 'Eu vou amanhã'},
-        {author: 123, body: 'tenha calma'},
-        {author: 145, body: 'Estou tranquilo'},
-        {author: 145, body: 'blz! Fui!!!'},
-        {author: 145, body: 'Você vem quando?'},
-        {author: 123, body: 'Eu vou amanhã'},
-        {author: 123, body: 'tenha calma'},
-        {author: 145, body: 'Estou tranquilo'},
-        {author: 145, body: 'blz! Fui!!!'},
-        {author: 145, body: 'Você vem quando?'},
-        {author: 123, body: 'Eu vou amanhã'},
-        {author: 123, body: 'tenha calma'},
-        {author: 145, body: 'Estou tranquilo'},
-        {author: 145, body: 'blz! Fui!!!'},
-        {author: 145, body: 'Você vem quando?'},
-        {author: 123, body: 'Eu vou amanhã'},
-        {author: 123, body: 'tenha calma'},
-        {author: 145, body: 'Estou tranquilo'},
-        {author: 145, body: 'blz! Fui!!!'},
-    ]);
+    const [talkList, setTalkList] = useState([]);
+    
+    useEffect(() => {
+        setTalkList([]);
+        let unsubscription = Api.onChatContent(data.chatId, setTalkList);
+        return unsubscription;
+        
+    }, [data.chatId])
 
     useEffect(()=>{
         if(body.current.scrollHeight > body.current.offsetHeight){
@@ -85,9 +52,19 @@ export default ({user}) => {
     }
 
     const handleSendClick = () => {
-
+        if(text !== ''){
+            Api.sendMessage(data, user.id, 'text', text);
+            setText('');
+            setEmojiOpen(false);
+        }
     }
     
+    const handleInputKeyUp = (e) => {
+        if(e.keyCode === 13){
+            handleSendClick();
+        }
+    }
+
     const handleMicClick = () => {
         if(recognition !== null){
             recognition.onstart = () => {
@@ -112,10 +89,10 @@ export default ({user}) => {
             <div className="chatWindow--headerinfo">
                 <img 
                     className="chatWindow--avatar"
-                    src="https://clinica.cenfesaude.com.br/wp-content/uploads/2021/02/img_avatar.png"
+                    src={data.image}
                     alt=""
                 />
-                <div className="chatWindow--name">Fulano de Tal</div>
+                <div className="chatWindow--name">{data.title}</div>
             </div>
 
             <div className="chatWindow--headerbuttons">
@@ -187,6 +164,7 @@ export default ({user}) => {
                         type="text"
                         value={text}
                         onChange={e=>setText(e.target.value)}
+                        onKeyUp={handleInputKeyUp}
                         />
                 </div>
                 
