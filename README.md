@@ -40,6 +40,7 @@ A "clone" of the WhatsApp Web as a way to study Reactjs.
 - [x] Implement recover data from database
 - [x] Implement last message view
 - [x] Styling message item
+- [x] Sort chat list
 
 # Getting Started with Create React App
 

@@ -14,6 +14,9 @@ export default {
         let result = await firebaseApp.auth().signInWithPopup(provider);
         return result;
     },
+    fbLogout: async () => {
+      firebase.auth().signOut()
+  },
     addUser: async (u) => {
       await db.collection('users').doc(u.id).set({
         name: u.name,
@@ -66,7 +69,26 @@ onChatList: async (userId, setChatList) => {
     if(doc.exists){
       let data = doc.data();
       if(data.chats){
-        setChatList(data.chats);
+        let chats = [...data.chats];
+
+        chats.sort((a,b)=> {
+          if(a.lastMessageDate === undefined){
+            return -1;
+          }
+
+          if(b.lastMessageDate === undefined){
+            return -1;
+          }
+
+          if(a.lastMessageDate < b.lastMessageDate){
+            return 1;
+          }else{
+            return -1;
+          }
+        });
+
+
+        setChatList(chats);
       }
     }
   });

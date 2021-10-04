@@ -15,6 +15,13 @@ import Api from "./Api";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default () => {
+
+window.addEventListener("beforeunload", (ev) => 
+{  
+    ev.preventDefault();
+    Api.fbLogout();
+});
+
   const [chatList, setChatList] = useState([
     // {chatId: 1, title: 'Fulano', image: 'https://clinica.cenfesaude.com.br/wp-content/uploads/2021/02/img_avatar.png'},
     // {chatId: 2, title: 'Joana', image: 'https://clinica.cenfesaude.com.br/wp-content/uploads/2021/02/img_avatar.png'},
@@ -22,11 +29,7 @@ export default () => {
     // {chatId: 4, title: 'Astolfo', image: 'https://clinica.cenfesaude.com.br/wp-content/uploads/2021/02/img_avatar.png'},
   ]);
   const [activeChat, setActiveChat] = useState({});
-  const [user, setUser] = useState({
-    id: 'YrzupfPTNrcsgpLNnTGsAGQcDZm1',
-    name: 'Ivan FAKE',
-    avatar: 'https://graph.facebook.com/4741835062494723/picture'
-  });
+  const [user, setUser] = useState(null);
 
   const [showNewChat, setShowNewChat] = useState(false);
 
