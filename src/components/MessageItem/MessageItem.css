@@ -15,14 +15,24 @@
 
 .messageText {
     font-size: 14px;
-    margin-top: 5px 40px 5px 5px ;
+    margin: 5px 40px 5px 5px ;
+}
+
+/* html[dir=ltr] .messageDate {
+    float: right;
+    margin: -10px 0 -5px 4px;
 }
 
 .messageDate {
+    position: relative;
+    z-index: 10;
+} */
+.messageDate {
     font-size: 11px;
     color: #999;
-    margin-right: 5px;
     text-align: right;
     height: 15px;
-    margin-top: -15px ;
+    margin-right: 5px;
+    margin-top: -10px ; /*-15px*/
+    
 }
