@@ -29,10 +29,11 @@ export default ({user, data}) => {
     const [text, setText] = useState('');
     const [listening, setListening] = useState(false);
     const [talkList, setTalkList] = useState([]);
-    
+    const [users, setUsers] = useState([]);
+
     useEffect(() => {
         setTalkList([]);
-        let unsubscription = Api.onChatContent(data.chatId, setTalkList);
+        let unsubscription = Api.onChatContent(data.chatId, setTalkList, setUsers);
         return unsubscription;
         
     }, [data.chatId])
@@ -53,7 +54,7 @@ export default ({user, data}) => {
 
     const handleSendClick = () => {
         if(text !== ''){
-            Api.sendMessage(data, user.id, 'text', text);
+            Api.sendMessage(data, user.id, 'text', text, users);
             setText('');
             setEmojiOpen(false);
         }

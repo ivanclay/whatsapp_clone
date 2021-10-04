@@ -71,19 +71,21 @@ onChatList: async (userId, setChatList) => {
     }
   });
 },
-onChatContent: async (chatId, setTalkList) => {
+onChatContent: async (chatId, setTalkList, setUsers) => {
   return db.collection('chats').doc(chatId).onSnapshot((doc)=>{
     if(doc.exists){
       let data = doc.data();
       // let teste = [];//new Array();
       const teste = data.messages.map(m =>( {... m,...{date: m.date.seconds}}) )
       //teste.push(data.messages);
-      console.log(teste);
+      //console.log(teste);
       setTalkList(teste);
+      //console.log(data.users);
+      setUsers(data.users);
     }
   });
 },
-sendMessage: async (chatData, userId, type, body) => {
+sendMessage: async (chatData, userId, type, body, users) => {
   let now = new Date();
   await db.collection('chats').doc(chatData.chatId).update({
     messages: firebase.firestore.FieldValue.arrayUnion({
@@ -93,5 +95,48 @@ sendMessage: async (chatData, userId, type, body) => {
       date: now
     })
    });
+
+   for (let index = 0; index < users.length; index++) {
+
+       let u = await db.collection('users').doc(users[index].id).get();
+       let uData = u.data();
+  
+       if(uData.chats){
+         let chats = [...uData.chats];
+  
+         for (let chat in chats) {
+           if(chats[chat].chatId === chatData.chatId){
+             chats[chat].lastMessage = body;
+             chats[chat].lastMessageDate = now;
+           }
+         }
+  
+         await db.collection('users').doc(users[index].id).update({
+           chats: chats
+         });
+       }
+   }
+   
+
+  //  for(var user in users){
+
+  //    let u = await db.collection('users').doc(users[user]).get();
+  //    let uData = u.data();
+
+  //    if(uData.chats){
+  //      let chats = [...uData.chats];
+
+  //      for (let chat in chats) {
+  //        if(chats[chat].chatId === chatData.chatId){
+  //          chats[chat].lastMessage = body;
+  //          chats[chat].lastMessageDate = now;
+  //        }
+  //      }
+
+  //      await db.collection('users').doc(users[user]).update({
+  //        chats: chats
+  //      });
+  //    }
+  //  }
 },
 }
